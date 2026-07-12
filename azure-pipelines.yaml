@@ -20,7 +20,7 @@ stages:
   - job: Build
     displayName: Build
     pool:  
-      name: local-agent
+      name: local-agent-tp
     
     steps:
     - task: Docker@2  #like a Docker image v2
