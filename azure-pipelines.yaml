@@ -1,11 +1,11 @@
 trigger:    
 - main    #branch
 
-#resources:  
-#- repo: self    #self repo
+resources:  
+- repo: self    #self repo
 
-variables:
-- group: CICD
+#variables:
+#- group: CICD
 
 parameters:
   - name: tag
@@ -33,10 +33,10 @@ stages:
         arguments: '--build-arg VERSION=${{ parameters.tag }}'
         containerRegistry: acrtestpagevictor
 
-    - task: Docker@2
-      displayName: Push to ACR
-      inputs:
-        command: push
-        containerRegistry: acrtestpagevictor
-        repository: ${{ parameters.imageName}}
-        tags: ${{ parameters.tag }}
+#    - task: Docker@2
+#      displayName: Push to ACR
+#      inputs:
+#        command: push
+#        containerRegistry: acrtestpagevictor
+#        repository: ${{ parameters.imageName}}
+#        tags: ${{ parameters.tag }}
