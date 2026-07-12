@@ -31,3 +31,11 @@ stages:
         tags: ${{ parameters.tag}} #Taked form parameters
         arguments: '--build-arg VERSION=${{ parameters.tag }}'
         containerRegistry: acrtestpagevictor
+
+    - task: Docker@2
+      displayName: Push to ACR
+      inputs:
+        command: push
+        containerRegistry: acrtestpagevictor
+        repository: ${{ parameters.imageName}}
+        tags: ${{ parameters.tag }}
