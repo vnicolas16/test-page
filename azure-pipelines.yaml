@@ -1,0 +1,33 @@
+trigger:    
+- main    #branch
+
+resources:  
+- repo: self    #self repo
+
+variables:
+- group: CICD
+
+parameters:
+  - name: tag
+    default: '$(Build.BuildId)' #identifier of build, # of build/version
+  - name: imageName
+    default: 'test-page'
+
+stages:
+- stage: CICD
+  displayName: CICD Workflow
+  jobs:   #Executions
+  - job: Build
+    displayName: Build
+    pool:  local-agent
+    
+    steps:
+    - task: Docker@2  #like a Docker image v2
+      displayName: Build an image
+      inputs:
+        repository: ${{ parameters.imageName}}  #taken from parameters
+        command: build
+        dockerfile: '**/Dockerfile' #double ** so it searches anywhere
+        tags: ${{ parameters.tag}} #Taked form parameters
+        arguments: '--build-arg VERSION=${{ parameters.tag }}'
+        containerRegistry: registryConnection
