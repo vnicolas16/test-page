@@ -1,8 +1,8 @@
 trigger:    
 - main    #branch
 
-resources:  
-- repo: self    #self repo
+#resources:  
+#- repo: self    #self repo
 
 variables:
 - group: CICD
@@ -19,7 +19,8 @@ stages:
   jobs:   #Executions
   - job: Build
     displayName: Build
-    pool:  local-agent
+    pool:  
+      name: local-agent
     
     steps:
     - task: Docker@2  #like a Docker image v2
